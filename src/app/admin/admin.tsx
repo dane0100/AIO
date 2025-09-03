@@ -1,14 +1,12 @@
 'use client';
 import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import ProjectForm from '@/components/ProjectForm';
+import ProjectForm from '@/components/projectform';
 
 export default function Admin() {
   const { data: session, status } = useSession();
-  const router = useRouter();
 
   if (status === 'loading') return <p className="p-8">Loading...</p>;
-  if (!session || session.user.role !== 'admin') {
+  if (!session || session?.user?.role !== 'admin') {
     signIn();
     return null;
   }
